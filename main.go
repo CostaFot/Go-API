@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
+	
+	"google.golang.org/appengine"
 )
 
 var people []Person
@@ -23,6 +25,8 @@ func main() {
 	router.HandleFunc("/people/{id}", CreatePerson).Methods("POST")
 	router.HandleFunc("/people/{id}", DeletePerson).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080", router))
+	
+	appengine.Main()
 
 }
 
