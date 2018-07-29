@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
@@ -15,17 +14,27 @@ var people []Person
 func main() {
 
 	people = append(people, Person{ID: "1", Firstname: "John", Lastname: "Doe", Address: &Address{City: "City X", State: "State X"}})
-	people = append(people, Person{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &Address{City: "City Z", State: "State Y"}})
+	people = append(people, Person{ID: "2", Firstname: "Koko", Lastname: "Boeing", Address: &Address{City: "City Z", State: "State Y"}})
 	people = append(people, Person{ID: "3", Firstname: "Francis", Lastname: "Sunday"})
 	people = append(people, Person{ID: "4", Firstname: "Kosta", Lastname: "Fotiadis"})
+	people = append(people, Person{ID: "5", Firstname: "Cam", Lastname: "Day"})
+	people = append(people, Person{ID: "6", Firstname: "Mark", Lastname: "Briggs", Address: &Address{City: "Woking", State: "Hampshire"}})
+	people = append(people, Person{ID: "7", Firstname: "Pogo", Lastname: "Poggers", Address: &Address{City: "Transylvania", State: "Noon State"}})
+	people = append(people, Person{ID: "8", Firstname: "Lulu", Lastname: "Mcfarlane", Address: &Address{City: "Kruekham", State: "Bront"}})
+	people = append(people, Person{ID: "9", Firstname: "Kendall", Lastname: "Atkins", Address: &Address{City: "Midrord", State: "Zriglore"}})
+	people = append(people, Person{ID: "10", Firstname: "Heath", Lastname: "Norton", Address: &Address{City: "Oawrapolis", State: "Cria"}})
+	people = append(people, Person{ID: "11", Firstname: "Hammond", Lastname: "Erickson", Address: &Address{City: "Drita", State: "Pliplens"}})
+	people = append(people, Person{ID: "12", Firstname: "Fatimah", Lastname: "Vazquez", Address: &Address{City: "Ofrosburgh", State: "Vlaaphora"}})
+
 
 	router := mux.NewRouter()
 	router.HandleFunc("/people", GetPeople).Methods("GET")
 	router.HandleFunc("/people/{id}", GetPerson).Methods("GET")
 	router.HandleFunc("/people/{id}", CreatePerson).Methods("POST")
 	router.HandleFunc("/people/{id}", DeletePerson).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(":8080", router))
-	
+	//log.Fatal(http.ListenAndServe(":8080", router))
+
+	http.Handle("/", router)
 	appengine.Main()
 
 }
